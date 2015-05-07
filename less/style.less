@@ -1,0 +1,357 @@
+// ######################################
+// ##### GRACEFUL DEGREDATION NOTES #####
+// ######################################
+
+// 1. Main structure version with No support for: @media, <link>, <style> 
+// 2. @font-face for web-based AOL
+// 3. Mobile @media support (all but Gmail App, Blackberry 6)
+// 4. Desktop client @media support
+// 5. Fall backs for Web-based Outlook, which does not support margin, but supports padding. 
+// 6. Fall back color for Word-engine-based Outlook Versions, which do not support background-image.
+
+// Quandry: Word-engine-based Outlook doesn't support max-width. 
+// 		- Any outlook window larger than 650px ignore and pixilation will occur. 
+// 		- Speculatively, this should be relatively rare.
+
+// #####################
+// ##### DEV NOTES #####
+// #####################
+
+// Everything in an @media query is declared !important to overrule inline styles on mobile, Apple & AOL-web.
+// Not sure about !important support/treatment in some clients. Is used by the big boys. Requires testing. 
+// 
+
+// max-width: isn't supported in Outlook 2007+, Notes, AOL desktop or Windows Mobile 7.5
+// This is really only a big deal on large screens (with this code, it only affects content at sizes larger than 650px wide)
+// Notes and AOL desktop have very low market share. NEGLIGIBLE
+// Windows Mobile 7.5 runs on very few devices where a greater than 650px wide screen. NEGLIGIBLE
+//
+// So it's just Outlook 2007+, really. 
+//
+// Which does pick up <!--[if (gte mso 9)|(IE)]> so, we'll just wrapper the thing. 
+
+// In some cases, to override default bottom spacing for letter decenders, vertical-align: top; is included with display: block; as display isn't supported in some clients.
+
+
+
+
+// #####################
+// ##### VARIABLES #####
+// #####################
+
+		// Colors for Imagine Toys
+		@orange: 			#f26841;
+		@green: 			#8ebf3f;
+		@bluGrn:	 		#1fbcbc;
+		@blue: 				#14b1e7;
+		@purple: 			#d66d96;
+
+		@background:		@blue;
+		@bodyBackground:	#f9f9f9; // Graceful degredation: mimics value of background image. 
+
+		@directory:			"http://images.epiinc.com/cdn/itc/email/images/2015/2015temp";
+		@google:			"http://fonts.googleapis.com/css";
+
+		// @font-face URL support is subject to change by Google
+		// Cuz' AOL in-browser supports @font-face, but not <link> for some reason.
+		@font-face {
+			font-family: 'Open Sans';
+			font-style: normal;
+			font-weight: 400; // Repeat the @font-face block to add 300.
+			src: local('Open Sans'), local('OpenSans'), url('http://fonts.gstatic.com/s/opensans/v10/cJZKeOuBrn4kERxqtaUH3bO3LdcAZYWl9Si6vvxL-qU.woff') format('woff');
+		}
+		@font-face {
+			font-family: 'Nunito';
+			font-style: normal;
+			font-weight: 700;
+			src: local('Nunito-Bold'), url('http://fonts.gstatic.com/s/nunito/v7/TttUCfJ272GBgSKaOaD7KpBw1xU1rKptJj_0jans920.woff2') format('woff2'), url('http://fonts.gstatic.com/s/nunito/v7/TttUCfJ272GBgSKaOaD7KrO3LdcAZYWl9Si6vvxL-qU.woff') format('woff');
+		}
+
+		@bodyType:			'Open Sans', 'times', 'times new roman', serif;
+		@headType:			'Nunito', 'helvetica neue', 'arial', sans-serif;
+
+		.borderTopBottom(@ptop, @pbot, @mtop, @mbot) {
+			width: 100%;
+			max-width: 650px; // Ignored by: Outlook 2007+, Notes, Windows Mobile 7.5
+			padding-top: @ptop;
+			padding-bottom: @pbot;
+			border-top: 1px solid @blue;
+			border-bottom: 1px solid @blue;
+			margin-top: @mtop;
+			margin-bottom: @mbot;
+		}
+
+
+
+
+
+
+// #####################
+// #### DEVELOPMENT ####
+// #####################
+
+body {
+	background-image: url('@{directory}/debut_light.png'); 
+	background-color: @bodyBackground;
+}
+
+p, a {
+	font-family: @bodyType;
+}
+
+a {
+	display: block;
+	color: @blue;
+	text-decoration: none;
+}
+
+a:hover {
+	color: @green !important; // To override inline styles later. 
+}
+
+h1 {
+	font-family: @headType;
+}
+
+.center, .social, .footer {
+	margin: 0 auto; // Ignored by Notes, All Outlook (except '11), Windows 8 Mobile. Fallback on align="center" attribute.
+	width: 650px;
+//	display: block;
+//	vertical-align: top;
+	td {
+		img {
+//			display: block;
+//			vertical-align: top;
+		}
+	}
+}
+
+.center {
+	tbody {
+		tr {
+			td.vatop {
+				vertical-align: top;
+				img {
+				//	vertical-align: top;
+				}
+			}
+		}
+	}
+}
+
+// .twowidevatop {
+// 	vertical-align: top;
+// }
+
+@media all and (min-width: 1px) and (max-width: 649px) {
+	.center {
+		max-width: 650px; // Ignored by: Outlook 2007+, Notes, AOL Desktop, Windows Mobile 7.5
+		width: 100% !important;
+	}
+	.footer, .footer-logo {
+		max-width: 650px; // Ignored by: Outlook 2007+, Notes, AOL Desktop, Windows Mobile 7.5
+  		width: 90% !important;
+	}
+}
+
+.display {
+	img {
+		width: 100%;
+	}
+}
+
+.full {
+	width: 100%;
+}
+
+.colored {
+	background-color: @background;
+}
+
+.header {
+	a {
+		width: 100%;
+		display: block;
+	}
+	img {
+		width: 100%;
+	}
+}
+
+.text-box {
+	text-align: center;
+	p {
+		padding-top: 15px;
+		padding-bottom: 5px;
+		font-weight: lighter;
+	}
+	a {
+		display: inline;
+	}
+}
+
+.nav-buttons {
+	background-color: #ffffff;
+	td {
+		img {
+			vertical-align: top; // Overrides default spacing for decenders placed under images. Needed for Gmail, Word-based Outlook and Windows Mobile OS.
+			display: block;
+		}
+		img:hover {
+			opacity: 0.8;
+		}
+	}
+}
+
+.title {
+	h1 {
+		text-align: center;
+		text-transform: lowercase;
+		padding-top: 10px;
+	}
+	p {
+		padding-bottom: 20px;
+	}
+}
+
+.foot-nav-title {
+	h1 {
+		.borderTopBottom(40px, 5px, 20px, 30px);
+		border-bottom: none;
+		color: @background;
+		font-size: 28px;
+	}
+}
+
+.foot-nav {
+	td {
+		padding: 4px 10px;
+	}
+	a:hover {
+		opacity: 0.7;
+	}
+	@media all and (max-width: 549px) {
+		td {
+			padding: 2px 4px !important;
+		}
+	}
+}
+
+// .social {
+// 	margin-top: 40px;
+// //	width: 100%;
+// 	.spacer {
+// 		width: 435px;
+// 	}
+// 	td {
+// 		padding: 0 0 0 15px;
+// 		img:hover {
+// 			opacity: 0.8;
+// 		}
+// 	}
+// }
+
+.footer {
+//	width: 100%;
+//	max-width: 650px; // Ignored by: Outlook 2007+, Notes, Windows Mobile 7.5
+	margin-bottom: 15px;
+	p.fine-print {
+		.borderTopBottom(40px, 5px, 20px, 30px);
+	}
+	p.contact {
+		text-align: center;
+		font-size: 11px;
+		line-height: 15px;
+		.borderTopBottom(30px, 20px, 1px, 35px);
+		a {
+			display: block;
+			font-size: 13px;
+			line-height: 22px;
+		}
+	}
+	p {
+		width: 90%;
+		max-width: 450px;
+		font-weight: 400;
+		font-size: 10px;
+		line-height: 12px;
+		padding-bottom: 6px;
+	}
+	a {
+		display: inline;
+	}
+}
+
+.footer-logo {
+	margin-bottom: 90px;
+	width: 90%;
+	max-width: 650px; // Ignored by: Outlook 2007+, Notes, Windows Mobile 7.5
+	.spacer {
+		width: 650px;
+	}
+	img {
+		width: 130px;
+	}
+}
+
+#heightfix {
+	height: 1px;
+}
+
+@media all and (max-width: 450px) {
+	.hidden-mobile {
+		display: none !important;
+	}
+}
+
+@media only screen and (min-width: 650px) {
+	.center {
+		width: 650px !important;
+		margin: 0 auto;
+	}
+// .social {
+// 	margin-top: 40px;
+// }
+}
+
+// #####################
+// ##### NORMALIZE #####
+// #####################
+
+// Down here so as not to confuse the inliner.
+
+html,
+body {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+table, tbody, tr, td {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	border-collapse: collapse;
+	border-spacing: 0 !important;
+}
+
+
+//img, p, a, h1 {
+//	padding: 0;
+//	margin: 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+

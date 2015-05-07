@@ -8,16 +8,16 @@ module.exports = function(grunt) {
 			dist: {
 				src: [
 					'dev/top.html', 
-					'dev/style.css',
+					'dev/_temp/style.css',
 					'dev/bottom.html'
 				],
-				dest: 'dev/master.html',
+				dest: 'dev/_temp/master.html',
 			}
 		},
 		less: {
 			development: {
 				files: {
-					'dev/style.css': 'less/style.less'
+					'dev/_temp/style.css': 'less/style.less'
 				}
 			}
 		},
@@ -29,7 +29,7 @@ module.exports = function(grunt) {
 					'preserveMediaQueries': 'true'
 				},
 				files: {
-					'dev/inline.html': 'dev/master.html'
+					'dev/inline.html': 'dev/_temp/master.html'
 				}
 			}
 		}

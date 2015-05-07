@@ -13,7 +13,13 @@ it's pretty easy, but one of the `npm` dependencies isn't up to date, so you hav
 
 `git clone https://github.com/tmpChris/Cloudscape_Builder`
 
+
+
 ### Step 2:
+`cd Cloudscape_Builder`
+
+...then...
+
 `npm install`
 
 ### Step 3:

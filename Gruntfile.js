@@ -29,7 +29,7 @@ module.exports = function(grunt) {
 					'preserveMediaQueries': 'true'
 				},
 				files: {
-					'dev/inline.html': 'dev/_temp/master.html'
+					'inline.html': 'dev/_temp/master.html'
 				}
 			}
 		}

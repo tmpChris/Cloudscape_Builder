@@ -32,6 +32,12 @@ module.exports = function(grunt) {
 					'inline.html': 'dev/_temp/master.html'
 				}
 			}
+		},
+		watch: {
+			scripts: {
+				files: ['dev/*.html', 'less/style.less'],
+				tasks: ['default']
+			}
 		}
 	});
 
@@ -39,6 +45,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-inline-css');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
 	grunt.registerTask('default', ['less', 'concat:dist', 'inlinecss']);

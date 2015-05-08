@@ -1,5 +1,5 @@
 # Cloudscape Builder
-A repo for the build template for Cloudscape responsive emails. 
+A repository for the build template for Cloudscape responsive emails. 
 
 ## About
 Created as a responsive email design workflow by Chris Jefferies
@@ -8,41 +8,34 @@ The grunt task splices together three files
 
 * top.html - an html5 head
 * style.less - which is complied to master.css during the workflow
-* bottom.html - the bulk of the cloudscape template.
+* bottom.html - the bulk of the html5 cloudscape template.
+
+And then inlines them to you html and leaves the `@media` queries within `<style></style>`. (hence the separate top and bottom files) 
 
 ## Preflight
 
-Requires a few command line tools. 
+Requires a few command line tools. I think I've got them all here. 
 
-* Node (and, more specifically, node package manager): http://nodejs.org/dist/v0.12.2/node-v0.12.2.pkg
-* git: http://git-scm.com/download/mac
-* Xcode command line tools (for git): $ `xcode-select --install`
-
-Then
-
-$ `npm install -g grunt-cli` 
-
-for a global install of the grunt command line interface. 
+* git: [http://git-scm.com/download/mac](http://git-scm.com/download/mac)
+* Apple's Xcode command line tools: $ `xcode-select --install` then follow the installer.
+* Node (and, more specifically, node package manager): [http://nodejs.org/dist/v0.12.2/node-v0.12.2.pkg](http://nodejs.org/dist/v0.12.2/node-v0.12.2.pkg)
+* Grunt *the javascript task runner* $ `npm install -g grunt-cli` for a global install of the grunt command line interface. 
 
 ## Install
 
-it's pretty easy, but one of the `npm` dependencies isn't up to date, so you have to do that *manually*.
+I had to hack it a little bit, but it seems to work. 
 
 ### Step 1:
 $ `cd ` to wherever you want your local files, then, 
 
 $ `git clone https://github.com/tmpChris/Cloudscape_Builder`
 
-
-
 ### Step 2:
 $ `cd Cloudscape_Builder`
 
-...then...
-
 $ `npm install`
 
-The grunt-inline-css folder has been removed from `package.json`. Since it's a custom build of this package, for now it just downloads manually with your `git clone`. 
+The grunt-inline-css folder has been removed from `package.json`. Since it's a custom build of this package with an updated juice library, for now it just downloads manually with your `git clone`. 
 
 ### Step 3 (optional):
 
@@ -54,4 +47,4 @@ starts the watch process which monitors the files and compiles to `inline.html` 
 
 ### Note:
 
-I'm still working on this particular set of HTML and .less (removing urls and making it more like a template) so while the workflow is complete, there's more work to be done. 
+I'm still working on this particular set of HTML and .less (removing urls and making it more like a template) so while the workflow is complete, the HTML needs an update.

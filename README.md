@@ -4,11 +4,19 @@ A repo for the build template for Cloudscape responsive emails.
 ## About
 Created as a responsive email design workflow by Chris Jefferies
 
+The grunt task splices together three files
+
+* top.html - an html5 head
+* style.less - which is complied to master.css during the workflow
+* bottom.html - the bulk of the cloudscape template.
+
 ## Preflight
 
 Requires a few command line tools. 
 
-Here's the first one: http://nodejs.org/dist/v0.12.2/node-v0.12.2.pkg
+* Node (and, more specifically, node package manager): http://nodejs.org/dist/v0.12.2/node-v0.12.2.pkg
+* git: http://git-scm.com/download/mac
+* Xcode command line tools (for git): $ `xcode-select --install`
 
 Then
 

@@ -45,6 +45,33 @@ $ `grunt watch`
 
 starts the watch process which monitors the files and compiles to `inline.html` whenever you hit save. 
 
+## Using Cloudscape
+
+Once you've got these assets installed, feel free to test your `$ grunt` task. It should spit a `inline.html` file into your root directory. Compare this against your `bottom.html` file. It should include a heavy amount of inline styles in nearly every element (for broad email rendering compatability).
+
+Next, open up the `Gruntfile` and modify the first group of object keys in `obj` to suit your email requirements. This group includes things like your Content Delivery Network URL, domain name and copyright information.
+
+The other groups in the `obj` object should change with every email you build, and include things cdn folder names for external resources, fine print expiration dates and alt text for specific images in your email. 
+
+The last thing to do is modify `bottom.html` to suit your design, and upload your image assets to your server. Cloudscape requires a certain folder setup to work (though, you can always modify the `Gruntfile` to suit your needs). 
+
+Example of a Main Banner Image in an email about bikes scheduled for delivery on Jan 1, 1970:
+
+`http://cdn.example.com/70-0101-bikes/email_mainBanner.png`
+
+
 ### Note:
 
-I'm still working on this particular set of HTML and .less (removing urls and making it more like a template) so while the workflow is complete, the HTML needs an update.
+This version still requires some modification to `bottom.html` before it's ready to send. Check the comments in this file for specific instructions.
+
+A port over to SASS is in the works. 
+
+
+
+
+
+
+
+
+
+

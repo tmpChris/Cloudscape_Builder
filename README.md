@@ -64,8 +64,14 @@ Example of a Main Banner Image in an email about bikes scheduled for delivery on
 
 This version still requires some modification to `bottom.html` before it's ready to send. Check the comments in this file for specific instructions.
 
-A port over to SASS is in the works. 
+### Todo
 
+* Building a new template needs to be faster. Include more html pieces in `bottom.html` and iterate multiple versions to include (along with new definition in `obj` to target them, for these html variants).
+* Link and tracking code is an issue, esp if you're directing users to different domains. Could be improved. `!domain` should probably include `http://` by default.
+* Port over to SASS.
+* Set it up to generate a `hard-facebook-share.html` with slightly varied content  (like: "sign up for messages like this _here_" instead of "view online version.") and complete og protocol.
+* Integrate html min
+* Integrate grunt to ftp into default.
 
 
 

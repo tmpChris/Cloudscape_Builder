@@ -59,6 +59,8 @@ Example of a Main Banner Image in an email about bikes scheduled for delivery on
 
 `http://cdn.example.com/70-0101-bikes/email_mainBanner.png`
 
+It produces two files `inline.html` and `index.html`. They are the same except 'index.html' has had the comments removed (but not the `<!--[if (gte mso 9)|(IE)]>`).
+
 
 ### Note:
 

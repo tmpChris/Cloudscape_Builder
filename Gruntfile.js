@@ -4,14 +4,14 @@ module.exports = function(grunt) {
 	var d = new Date();
 	var obj = {
 		// Template
-		cdnLocation: 	'string_partial',
+		cdnLocation: 	'cdn_location',
 		trCoStart: 		'?utm_source=bm23&utm_medium=email&utm_content=',
 		trCoEnd: 		'&utm_campaign=!date-code-!slug&a=!date-code-!slug',
 		domainName: 	'example.com',
 		copyright: 		'© ' + d.getFullYear() + ' Some Legal Entity. Disclaimer.',
 
-		// Which html file(s)?
-		fileBottom: 	'dev/main-plus-six.html',
+		// Which html file (for local versioning & iteration)
+		fileBottom: 	'dev/bottom.html',
 
 		// Primary content
 		dateCode: 		'70-0101',
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
 			sub3R: 			'/link_to'
 		},
 
-		altText: {
+		altText: { // Also used as title attribute in some corresponding <a>'s.
 			mainPromo: 	'string',
 			featureOne: 'string',
 			featureTwo: 'string',
